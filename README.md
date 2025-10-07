@@ -1,6 +1,6 @@
 # 🛡️ SOC Automation Project – Wazuh + TheHive + Shuffle
 
-![SOC Automation Diagram](diagram.png)
+  ![SOC Automation Diagram](diagram.png)
 
 ![Platform](https://img.shields.io/badge/Platform-Ubuntu%2022.04-blue)
 ![Language](https://img.shields.io/badge/Language-YAML%2C%20XML-orange)
