@@ -176,3 +176,52 @@ In the Wazuh Manager CLI, add the following integration block:
 ```
 Restart the Wazuh manager.
 Verify that alerts flow to Shuffle correctly.
+
+---
+
+### 🚨 Active Response (Firewall Block)
+
+#### 🧱 On the Wazuh Manager
+Add Active Response Command
+```yml
+<command>
+  <name>firewall-drop</name>
+  <executable>firewall-drop</executable>
+  <timeout>no</timeout>
+  <location>local</location>
+</command>
+```
+
+#### Configure API Authentication
+```bash
+curl -u user:password -k -X GET "https://<WAZUH-IP>:55000/security/user/authenticate?raw=true"
+```
+
+---
+
+### 🔗 Connect to Shuffle Workflow
+
+Add a **manual user input** step in the Shuffle workflow:
+```
+Prompt → “Would you like to block this IP: $exec.all_fields.data.srcip?”
+```
+If confirmed, trigger **active response** via the **Wazuh API**.
+
+---
+
+### ✉️ Workflow Summary
+| Step | Action                                      | Tool            |
+| ---- | ------------------------------------------- | --------------- |
+| 1    | Run Mimikatz on client                      | Windows 10      |
+| 2    | Detect via Sysmon & Wazuh custom rule       | Wazuh           |
+| 3    | Alert sent to TheHive                       | Wazuh → TheHive |
+| 4    | Shuffle receives webhook, enriches alert    | Shuffle         |
+| 5    | VirusTotal reputation check                 | Shuffle         |
+| 6    | Alert & email notification                  | TheHive + Email |
+| 7    | Optional firewall block via active response | Wazuh           |
+
+---
+
+### 💡 Acknowledgment
+Special thanks to MyDFIR on YouTube
+for the excellent walkthrough and inspiration.
