@@ -142,3 +142,18 @@ When **Wazuh detects Mimikatz**:
    ```regex
    SHA256=([0-9A-Fa-f]{64})
    ```
+4. Connect the **VirusTotal** app with your API key.
+5. Create a **“Get Hash Report”** action.
+6. Connect results to **TheHive** using a **Create Alert action** and customize fields:
+  ```txt
+Description: $exec.title
+PAP: 2
+Severity: $exec.severity
+Source: $exec.pretext
+SourceRef: $exec.rule_id
+Status: new
+Summary: Mimikatz activity detected on host $exec.host
+```
+7. Add Email Notification:
+
+   
