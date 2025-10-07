@@ -108,3 +108,37 @@ Created a **custom Sysmon rule** to detect Mimikatz execution by file name.
   </mitre>
 </rule>
 ```
+
+---
+
+### 🧩 Custom Detection Rule
+
+Based on `0800-sysmon_id_1` rule template.  
+
+Even when renamed (e.g., `youareawesome.exe`), detection persisted due to Sysmon telemetry.
+
+---
+
+## 🤖 Shuffle (SOAR) Automation
+
+### 🧠 Workflow Summary
+
+When **Wazuh detects Mimikatz**:
+
+1. **Shuffle** receives the alert via webhook.  
+2. Extracts **SHA256 hash** from alert data.  
+3. Queries **VirusTotal** for file reputation.  
+4. Sends details to **TheHive** to create an alert.  
+5. Sends an **email notification** to the SOC Analyst.
+
+---
+
+### ⚙️ Workflow Configuration
+
+1. Create a **new workflow** in Shuffle.  
+2. Add a **Webhook trigger** (rename it “Wazuh”) and copy its URL into the Wazuh manager integration.  
+3. Use **Regex** to extract the hash:  
+
+   ```regex
+   SHA256=([0-9A-Fa-f]{64})
+   ```
