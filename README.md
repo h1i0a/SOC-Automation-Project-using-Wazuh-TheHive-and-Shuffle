@@ -222,6 +222,7 @@ If confirmed, trigger **active response** via the **Wazuh API**.
 
 ---
 
-### 💡 Acknowledgment
-Special thanks to MyDFIR on YouTube
+## 💡 Acknowledgment
+
+Special thanks to [MyDFIR on YouTube](https://www.youtube.com/@MyDFIR)  
 for the excellent walkthrough and inspiration.
