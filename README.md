@@ -155,5 +155,24 @@ Status: new
 Summary: Mimikatz activity detected on host $exec.host
 ```
 7. Add Email Notification:
+     ```text
+     Subject: Mimikatz Detected
+     Body: Include VirusTotal report summary
+      ```
 
-   
+---
+
+### 🔐 Wazuh Integration with Shuffle
+
+In the Wazuh Manager CLI, add the following integration block:
+
+```yml
+<integration>
+  <name>shuffle</name>
+  <hook_url>https://shuffle-webhook-url</hook_url>
+  <alert_format>json</alert_format>
+  <level>100002</level>
+</integration>
+```
+Restart the Wazuh manager.
+Verify that alerts flow to Shuffle correctly.
